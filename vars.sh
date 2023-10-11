@@ -1,0 +1,5 @@
+end_hour='8'
+charge_for_hours='0'
+max_price_for_high_limit='50'
+max_charge_limit='80'
+min_charge_limit='50'
