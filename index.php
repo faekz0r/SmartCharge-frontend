@@ -1,109 +1,9 @@
 <html>
 <head>
 
-<style>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6Rqe9uvcReZ/lGO9sFHBcCs7Q6tSAa4wM4b0vyGp4F4cCMZF4W4x4S9g5fMHr7gZ9Fp" crossorigin="anonymous">
 
-form {
-  text-align: center;
-  margin: 0 auto 0;
-}
-
-input[type=number] {
-   width: 66px;
-}
-
-html {
-    /* Base font size */
-    font-family: Arial;
-    font-size: 16px;
-}
-
-label,
-input {
-  /* In order to define widths */
-  display: inline-block;
-  font-size: 2.5rem;
-}
-
-
-input+input {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-a:link, a:visited, input[type=submit] {
-  background-color: DeepSkyBlue;
-  color: white;
-  cursor: pointer;
-  border: 0px;
-  border-radius: 28px;
-  padding: 10px 20px 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  transition: 0.2s;
-  margin: 15px auto 15px;
-}
-
-a {
-  margin: 15px 5px 15px !important;
-}
-
-a:hover, a:active, input[type=submit]:hover {
-  background-color: DodgerBlue;
-/*  color: white; */
-}
-
-p {
-    margin: 25px auto 25px;
-    display: block;
-    text-align: center;
-    font-size: 2.5rem;
-}
-
-td { text-align: right; }
-td.submit { text-align: center; }
-
-table {
-  margin: 0 auto 0;
-}
-
-
-</style>
-
-<script src="jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-// prevent default html submit
-$(function () {  
-  $('#myForm').on("submit", function(event){
-	event.preventDefault();
-	$.ajax({
-	  method: "POST",
-	  url: 'get_data.php',
-	  data: $('#myForm').serialize(),
-	  cache: false,
-	  success: function(data){
-		  location.reload();
-	  },
-	  error: function(){
-		  alert("Form submission failed!");
-	  }
-	});
-   });
-});
-</script>
 </head>
 <body>
 
@@ -120,68 +20,43 @@ if (preg_match($pattern, $line, $match)) {
      }
 }
 
+fclose($user_vars);
+
 # print_r($conf);
 
 extract($conf);
 
-# echo '<span style="white-space: pre-line; line-height:30px">
-echo '
-<table>
-  <form name="myForm" id="myForm"">
-   <tr>
-      <td>
-        <label for="end_hour">End at (h):</label>
-      </td>
-      <td>
-        <input type="number" name="end_hour" min="0" max="23" value="'. $end_hour .'">
-      </td>
-    </tr>
-    <tr>
-      <td>
-	<label for="charge_for_hours">Charge for hours:</label>
-      </td>
-      <td>
-        <input type="number" name="charge_for_hours" min="0" max="23" value="'. (isset($charge_for_hours) ? $charge_for_hours : "") .'">
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="max_price_for_high_limit">Max price (€/mWh):</label>
-      </td>
-      <td>
-        <input type="number" name="max_price_for_high_limit" value="'. $max_price_for_high_limit .'">
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="max_charge_limit">Max charge limit %:</label>
-      </td>
-      <td>
-        <input type="number" name="max_charge_limit" min="50" max="100" value="'. $max_charge_limit .'">
-      </td>
-    </tr> 
-       
-    <tr>
-      <td>
-        <label for="min_charge_limit">Min charge limit %:</label>
-      </td>
-      <td>
-        <input type="number" name="min_charge_limit" min="50" max="80" value="'. $min_charge_limit .'"/>
-      </td>
-    </tr>
-
-    <tr>
-      <td align="center" colspan="2" class="submit">
-        <input type="submit" value="Save">
-      </td>
-    </tr>
-
+$formDiv = <<<HTML
+<div class="form-container">
+  <form name="myForm" id="myForm" action="get_data.php">
+    <div class="form-group">
+      <label for="end_hour">End at (h):</label>
+      <input type="number" name="end_hour" min="0" max="23" value="{$end_hour}">
+    </div>
+    <div class="form-group">
+      <label for="charge_for_hours">Charge for hours:</label>
+      <input type="number" name="charge_for_hours" min="0" max="23" value="{$charge_for_hours}">
+    </div>
+    <div class="form-group">
+      <label for="max_price_for_high_limit">Max price (€/mWh):</label>
+      <input type="number" name="max_price_for_high_limit" value="{$max_price_for_high_limit}">
+    </div>
+    <div class="form-group">
+      <label for="max_charge_limit">Max charge limit %:</label>
+      <input type="number" name="max_charge_limit" min="50" max="100" value="{$max_charge_limit}">
+    </div>
+    <div class="form-group">
+      <label for="min_charge_limit">Min charge limit %:</label>
+      <input type="number" name="min_charge_limit" min="50" max="80" value="{$min_charge_limit}">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Save">
+    </div>
   </form>
-</table>
-';
+</div>
+HTML;
 
+echo $formDiv;
 
 exec("pgrep main.sh", $pids);
 
@@ -191,11 +66,6 @@ if(!empty($pids)) {
 } else {
 	echo '<p>SmartCharge is not running</p>';
 	$running=false;
-}
-
-function killScript() {
-	exec("killall main.sh");
-	exec("sudo -u being /usr/bin/killall main.sh");
 }
 
 if ($running) {
@@ -211,6 +81,15 @@ echo '<p><a href="?run=true">'. $run .'</a>'. $kill_href .'</p>';
 
 echo '<p><a href="tail_log.php">Log tail</a><a href="whole_log.php">Whole log</a></p>';
 
+function killScript() {
+    exec("killall main.sh");
+    exec("sudo -u being /usr/bin/killall main.sh");
+}
+
+function redirect() {
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
 
 
 if ( (isset($_GET['run'])) ) {
@@ -220,8 +99,7 @@ if ( (isset($_GET['run'])) ) {
 	}
 	exec("cd /home/being/SmartCharge; /home/being/SmartCharge/main.sh > /home/being/SmartCharge/main.log 2>&1 &");
 	sleep(1);
-	header('Location: ' . $_SERVER['HTTP_REFERER']);
-	exit;
+	redirect();
 }
 
 if ( (isset($_GET['kill'])) ) {
@@ -230,8 +108,7 @@ if ( (isset($_GET['kill'])) ) {
         killScript();
 	}
 	sleep(1);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+	redirect();
 }
 
 $last_ran_date=(file_get_contents("/home/being/SmartCharge/last_ran_date"));
@@ -240,6 +117,9 @@ echo '<p style="font-size: 1.5em">Last start:<br>'. $last_ran_date .'</p>';
 
 
 ?>
+
+<script src="jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="functions.js"></script>
 
 </body>
 </html>
