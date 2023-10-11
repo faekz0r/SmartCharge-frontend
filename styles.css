@@ -1,24 +1,18 @@
+/* Base Styles */
+html {
+  font-family: Arial;
+  font-size: 16px;
+}
+
+/* Form Container */
 .form-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  margin: 0 auto;
 }
 
-/* .form-group {
-  margin-bottom: 1rem;
-}
-
-
-.form-group label {
-  display: inline-block;
-  width: 200px;
-}
-
-.form-group input {
-  width: 100px;
-}
-*/
-
+/* Form Group */
 .form-group {
   display: flex;
   justify-content: space-between;
@@ -28,102 +22,72 @@
 
 .form-group label {
   flex: 1;
+  padding: 0 10;
+  font-size: 2.5rem;  /* Adjust the font size here */
 }
 
-.form-group input[type="number"] {
-  flex: 0 0 auto; /* Don't grow, don't shrink, auto basis */
-  width: 4em; /* Adjust as needed */
-  text-align: center;
-}
-
-input[type="submit"] {
-  flex: 0 0 auto; /* Don't grow, don't shrink, auto basis */
-  padding: 10px 20px; /* Adjust as needed */
-}
-
-
-
-form {
-  text-align: center;
-  margin: 0 auto 0;
-}
-
-input[type=number] {
-   width: 66px;
-}
-
-html {
-    /* Base font size */
-    font-family: Arial;
-    font-size: 16px;
-}
-
-label,
-input {
-  display: inline-block;
-  font-size: 2.5rem;
-}
-
-
-label,
+/* Global style for all number input fields */
 input[type="number"] {
-  display: block;  /* Make them block-level elements */
-  width: 100%;     /* Take up the full width */
-  text-align: center; /* Center the text */
-  margin-bottom: 0.5rem; /* Add some space below each element */
+  -moz-appearance: textfield; /* Remove increment/decrement buttons for Firefox */
 }
 
-
-input+input {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+/* Remove increment/decrement buttons for WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+.form-group input[type="number"] {
+  flex: 0 0 auto;
+  width: 2.5em;
+  text-align: center;
+  font-size: 2.5rem;  /* Adjust the font size here */
 }
 
-a:link, a:visited, input[type=submit] {
+
+
+/* Submit Button */
+input[type="submit"] {
   background-color: DeepSkyBlue;
+  margin: 0 auto;
   color: white;
-  cursor: pointer;
-  border: 0px;
+  border: none;
   border-radius: 28px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   transition: 0.2s;
-  margin: 15px auto 15px;
+  cursor: pointer;
+  font-size: 2.5rem;  /* Adjust the font size here */
 }
 
-a {
-  margin: 15px 5px 15px !important;
-}
-
-a:hover, a:active, input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: DodgerBlue;
-/*  color: white; */
 }
 
+/* Links */
+a {
+  background-color: DeepSkyBlue;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 28px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.2s;
+  margin: 15px 5px;
+  font-size: 2.5rem;  /* Adjust the font size here */
+}
+
+a:hover {
+  background-color: DodgerBlue;
+}
+
+/* Paragraphs */
 p {
-    margin: 25px auto 25px;
-    display: block;
-    text-align: center;
-    font-size: 2.5rem;
-}
-
-td { text-align: right; }
-td.submit { text-align: center; }
-
-table {
-  margin: 0 auto 0;
+  margin: 25px auto;
+  text-align: center;
+  font-size: 2.5rem;
 }
