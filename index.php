@@ -2,7 +2,7 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6Rqe9uvcReZ/lGO9sFHBcCs7Q6tSAa4wM4b0vyGp4F4cCMZF4W4x4S9g5fMHr7gZ9Fp" crossorigin="anonymous">
+<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
 
 </head>
 <body>
@@ -27,6 +27,11 @@ fclose($user_vars);
 extract($conf);
 
 $formDiv = <<<HTML
+<div id="loadingIndicator" style="display:none;">
+  <i class="fa-solid fa-spinner fa-spin-pulse" style="color: DeepSkyBlue"></i>Loading...
+</div>
+
+
 <div class="form-container">
   <form name="myForm" id="myForm" action="get_data.php">
     <div class="form-group">
